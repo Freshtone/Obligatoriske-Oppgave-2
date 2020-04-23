@@ -7,23 +7,22 @@
 </head>
 <body>
 
-
-
- 
-    <div id="content">
-    </div>
+    <div id="content"></div>
     
     <script>
+
+
         // hjelpevariable for både view og controller
         var contentDiv = document.getElementById('content');
     
+
         // model
         let numbers = [7, 3, 1, 5, 8];
         let selectedBar = "null";
         let disabledButton = true; 
         let barValueWarning = document.getElementById("warningDiv");
         
-    
+
         // view
         show();
         function show() {
@@ -55,6 +54,8 @@
 
                // <div id="warningDiv">${barValueWarning}</div>
         }
+
+
         function createBar(number, numberOfBars) {
             const width = 8;
             const spacing = 2;
@@ -77,6 +78,7 @@
                         </rect>`;
         }
     
+
         function calcColor(min, max, val) {
             var minHue = 240, maxHue = 0;
             var curPercent = (val - min) / (max - min);
@@ -85,8 +87,8 @@
             show();
         }
     
-        // controller
 
+        // controller
         function barChooser(numberOfBars) {
             
             if (selectedBar == numberOfBars) {
@@ -99,7 +101,9 @@
             show();
         }
 
+
         function addBar()   {
+            
             let inputValue = document.getElementById("value");
             
 
@@ -109,7 +113,10 @@
                 numbers.push(parseInt(inputValue.value))
                 show();
         }
+
+
         function editBar()  {
+            
             let inputValue = document.getElementById("value");
 
                 if (inputValue.value == 0 || inputValue.value > 10) {
@@ -119,12 +126,12 @@
                 show();
         }
 
+
         function removeBar()    {
                 
                 numbers.splice(parseInt(selectedBar) - 1, 1)
-                show();
+                show();                     
         }
-
     </script>
 </body>
 </html>
