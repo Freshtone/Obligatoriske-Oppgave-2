@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-    <div id="content"></div>
-    
-    <script>
-
-
         // hjelpevariable for både view og controller
         var contentDiv = document.getElementById('content');
     
@@ -33,7 +19,7 @@
                 svgInnerHtml += createBar(numbers[i], i + 1);
             }
             contentDiv.innerHTML = `
-                <svg id="chart" width="500" viewBox="0 0 80 60">
+                <svg id="chart" width="500" viewBox="0 0 60 50">
                     ${svgInnerHtml}
                 </svg>
                 
@@ -132,9 +118,3 @@
                 numbers.splice(parseInt(selectedBar) - 1, 1)
                 show();                     
         }
-    </script>
-</body>
-</html>
-
-
-<!--barValueWarning = "Value must be between and including 0 and 10" }
