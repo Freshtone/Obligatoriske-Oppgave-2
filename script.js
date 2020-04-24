@@ -4,9 +4,9 @@
 
         // model
         let numbers = [7, 3, 1, 5, 8];
-        let selectedBar = "null";
+        let selectedBar = null;
         let disabledButton = true; 
-        let barValueWarning = document.getElementById("warningDiv");
+        let barValueWarning = null;
         
 
         // view
@@ -15,11 +15,10 @@
             let onOffButton = disabledButton == true ? 'disabled' : '' 
             let svgInnerHtml = '';
             for (let i = 0; i < numbers.length; i++) {
-                let numberOfBars = i + 1;
                 svgInnerHtml += createBar(numbers[i], i + 1);
             }
             contentDiv.innerHTML = `
-                <svg id="chart" width="500" viewBox="0 0 60 50">
+                <svg id="chart" width="500" viewBox="0 0 60 60">
                     ${svgInnerHtml}
                 </svg>
                 
@@ -36,11 +35,12 @@
                 
                 <button id="removeBarButton" onclick="removeBar()"
                  ${onOffButton}>Fjerne valgt stolpe</button>
-                `;
+                 
+                <br/>
 
-               // <div id="warningDiv">${barValueWarning}</div>
+                <div id="warningDiv">${barValueWarning}</div>
+                `; 
         }
-
 
         function createBar(number, numberOfBars) {
             const width = 8;
@@ -77,14 +77,14 @@
         // controller
         function barChooser(numberOfBars) {
             
-            if (selectedBar == numberOfBars) {
-                disabledButton = true;
-                selectedBar = 'Ingen'
-            } else {
-                selectedBar = numberOfBars;
-                disabledButton = false;
-            }
-            show();
+                if (selectedBar == numberOfBars) {
+                    disabledButton = true;
+                    selectedBar = 'Ingen'
+                } else {
+                    selectedBar = numberOfBars;
+                    disabledButton = false;
+                }
+                show();
         }
 
 
@@ -92,23 +92,21 @@
             
             let inputValue = document.getElementById("value");
             
-
                 if (inputValue.value < 1 || inputValue.value > 10)    {
-                return alert("Value must be between 1 and 10") //Why cant i use     innerHTML here ?
-        }
-                numbers.push(parseInt(inputValue.value))
-                show();
+                    barValueWarning = "Value must be between 1 and 10";
+                }   else {
+                numbers.push(parseInt(inputValue.value));}
+                show(); 
         }
 
 
         function editBar()  {
-            
+             
             let inputValue = document.getElementById("value");
 
                 if (inputValue.value == 0 || inputValue.value > 10) {
-                    return alert("Value must be between 1 and 10")
-                }
-                numbers[parseInt(selectedBar) - 1] = parseInt(inputValue.value);
+                    barValueWarning = "Value must be between 1 and 10"
+                }   else {numbers[parseInt(selectedBar) - 1] = parseInt (inputValue.value);}
                 show();
         }
 

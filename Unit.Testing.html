@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+  <script src="script.js"></script>
+
+<script>
+
+// mock-view
+
+  function show(){}
+
+  //modell
+
+        let numbers;
+        let selectedBar;
+        let disabledButton; 
+        let barValueWarning;
+        let inputValue;
+
+        QUnit.test("Change bar", function (assert) {
+          let inputValue = document.getElementById("value");
+
+            editBar();
+            assert.equal(numbers[selectBarNo - 1], 5);
+            assert.equal(error, null);
+            numbers = [7, 3, 1, 5, 8];
+        });
+  
+</script>
+</body>
+</html>
