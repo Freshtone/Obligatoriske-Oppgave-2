@@ -1,40 +1,96 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>QUnit Example</title>
   <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
 </head>
+
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
   <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
   <script src="script.js"></script>
 
-<script>
+  <script>
 
-// mock-view
+    // mock-view
 
-  function show(){}
+    function show() { }
 
-  //modell
+    //modell
 
-        let numbers;
-        let selectedBar;
-        let disabledButton; 
-        let barValueWarning;
-        let inputValue;
+    let numbers;
+    let selectedBar;
+    let disabledButton;
+    let barValueWarning;
+    let inputValue;
 
-        QUnit.test("Change bar", function (assert) {
-          let inputValue = document.getElementById("value");
+    function initModel() {
+      numbers = [7, 3, 1, 5, 8];
+      barValueWarning = null;
+    }
 
-            editBar();
-            assert.equal(numbers[selectBarNo - 1], 5);
-            assert.equal(error, null);
-            numbers = [7, 3, 1, 5, 8];
-        });
-  
-</script>
+    QUnit.test("Edit bar - valid value", function (assert) {
+      initModel();
+      inputValue = 7;
+      selectedBar = 3;
+      editBar();
+      assert.equal(numbers[2], 7);
+      assert.equal(barValueWarning, null);
+      assert.deepEqual(numbers, [7, 3, 7, 5, 8])
+    });
+
+
+    QUnit.test("Edit bar - invalid value", function (assert) {
+      initModel();
+      inputValue = 17;
+      selectedBar = 3;
+      editBar();
+      assert.equal(numbers[2], 1);
+      assert.equal(barValueWarning, "Value must be between 1 and 10");
+      assert.deepEqual(numbers, [7, 3, 1, 5, 8]);
+    });
+
+    QUnit.test("Delete Bar", function (assert) {
+      initModel();
+      selectedBar = 2;
+      removeBar();
+      assert.equal(numbers.length, 4);
+      assert.deepEqual(numbers, [7, 1, 5, 8]);
+    });
+
+    QUnit.test("Add Bar", function (assert) {
+      initModel();
+      inputValue = 5;
+      addBar();
+      assert.equal(numbers[5], 5);
+      assert.equal(barValueWarning, null);
+      assert.deepEqual(numbers, [7, 3, 1, 5, 8, 5]);
+    });
+
+    QUnit.test("Select Bar - Valid Selection", function (assert) {
+      initModel();
+      selectedBar = 3;
+      barChooser();
+      assert.equal(numbers[2], 1);
+      assert.deepEqual(numbers, [7, 3, 1, 5, 8])
+    });
+
+    QUnit.test("Select Bar - Invalid Selection", function (assert) {
+      initModel();
+      selectedBar = 7;
+      barChooser();
+      assert.equal(numbers[6], null);
+      assert.equal(barValueWarning, null);
+      assert.deepEqual(numbers, [7, 3, 1, 5, 8])
+    });
+
+  </script>
 </body>
+
 </html>
+
+<!-- oninput = "name = this.value" -->
